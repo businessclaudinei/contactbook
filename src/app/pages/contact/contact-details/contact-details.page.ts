@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Contact } from 'src/app/models/contact.model';
+import { ContactService } from 'src/app/services/contact.service';
+import { Result } from 'src/app/models/result.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-contact-details',
@@ -6,10 +10,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact-details.page.scss'],
 })
 export class ContactDetailsPage implements OnInit {
-
-  constructor() { }
+  public contact: Contact;
+  constructor(private service: ContactService, private router: ActivatedRoute) { }
 
   ngOnInit() {
+    let id = this.router.snapshot.paramMap.get('contact');
+
+    this.service.getContact(id).subscribe((res: Result) => {
+      this.contact = res.data;
+    }, (err) => { });
   }
+
+  // addToCart() {
+  //   ContactUtil.add(this.contact);
+  //   this.navCtrl.navigateRoot('/');
+  //   //this.showMessage('Produto adicionado ao carrinho!');
+  // }
+
 
 }

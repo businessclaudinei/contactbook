@@ -10,6 +10,10 @@ export class ContactService {
   constructor(private http: HttpClient) { }
 
   getContacts() {
-    return this.http.get(environment.apiUrl);
+    return this.http.get(`${environment.apiUrl}v1/contact`);
+  }
+
+  getContact(id: string) {
+    return this.http.get(`${environment.apiUrl}v1/contact/${id}`);
   }
 }

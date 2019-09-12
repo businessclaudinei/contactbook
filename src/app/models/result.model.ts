@@ -1,4 +1,4 @@
-export class Response {
+export class Result {
     constructor(
         public message: string = '',
         public success: boolean = false,

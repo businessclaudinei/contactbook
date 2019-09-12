@@ -1,15 +1,35 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
+import { MasterPage } from './pages/master/master.page';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
-  { path: 'signup', loadChildren: './pages/signup/signup.module#SignupPageModule' },
-  { path: 'contact-list', loadChildren: './pages/contact/contact-list/contact-list.module#ContactListPageModule' },
-  { path: 'contact-details', loadChildren: './pages/contact/contact-details/contact-details.module#ContactDetailsPageModule' },
-  { path: 'edit-contact', loadChildren: './pages/contact/edit-contact/edit-contact.module#EditContactPageModule' },
+  { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule) },
+  { path: 'signup', loadChildren: () => import('./pages/signup/signup.module').then(m => m.SignupPageModule) },
+  {
+    path: '',
+    component: MasterPage,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'home',
+        loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
+      },
+      {
+        path: 'contact-list',
+        loadChildren: () => import('./pages/contact/contact-list/contact-list.module').then(m => m.ContactListPageModule)
+      },
+      {
+        path: 'contact/:contact',
+        loadChildren: () => import('./pages/contact/contact-details/contact-details.module').then(m => m.ContactDetailsPageModule)
+      }
+    ]
+  }
 ];
+
+//{ path: 'edit-contact', loadChildren: () => import('./pages/contact/edit-contact/edit-contact.module').then(m => m.HomePageModule) },
+
 
 @NgModule({
   imports: [
