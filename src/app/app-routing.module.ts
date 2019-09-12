@@ -12,17 +12,21 @@ const routes: Routes = [
     component: MasterPage,
     canActivate: [AuthGuard],
     children: [
+      // {
+      //   path: 'home',
+      //   loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
+      // },
       {
         path: 'home',
-        loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
-      },
-      {
-        path: 'contact-list',
         loadChildren: () => import('./pages/contact/contact-list/contact-list.module').then(m => m.ContactListPageModule)
       },
       {
         path: 'contact/:contact',
         loadChildren: () => import('./pages/contact/contact-details/contact-details.module').then(m => m.ContactDetailsPageModule)
+      },
+      {
+        path: 'editor/:contact',
+        loadChildren: () => import('./pages/contact/edit-contact/edit-contact.module').then(m => m.EditContactPageModule)
       }
     ]
   }

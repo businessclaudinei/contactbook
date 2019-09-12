@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserUtil } from 'src/app/utils/user.util';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-user-card',
@@ -7,7 +8,7 @@ import { UserUtil } from 'src/app/utils/user.util';
   styleUrls: ['./user-card.component.scss'],
 })
 export class UserCardComponent implements OnInit {
-  public user: any;
+  public user: User;
   constructor() { }
 
   ngOnInit() {

@@ -1,13 +1,15 @@
+import { User } from '../models/user.model';
+
 export class UserUtil {
-    static get(): any {
-        const data = localStorage.getItem('contactbook.user');
-        if (!data) return null;
-        return JSON.parse(data);
+    static get(): User {
+        const user = localStorage.getItem('contactbook.user');
+        if (!user) return null;
+        return JSON.parse(user);
     }
-    static set(data: any): any {
-        localStorage.setItem('contactbook.user', JSON.stringify(data));
+    static set(user: User): any {
+        localStorage.setItem('contactbook.user', JSON.stringify(user));
     }
-    static clear(): any {
+    static clear() {
         localStorage.removeItem('contactbook.user');
     }
 

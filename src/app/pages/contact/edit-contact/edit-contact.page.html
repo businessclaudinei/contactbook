@@ -1,9 +1,53 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>edit-contact</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col sizeXs="12" sizeMd="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Cadastrar Contato</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="form">
+              <ion-input type="hidden" formControlName="id"></ion-input>
+              <ion-input type="hidden" formControlName="image"></ion-input>
+              <ion-list>
+                <ion-item>
+                  <ion-label position="floating">Nome</ion-label>
+                  <ion-input type="text" formControlName="name"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">E-mail</ion-label>
+                  <ion-input type="email" formControlName="email"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">CPF</ion-label>
+                  <ion-input type="text" formControlName="governmentId"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Telefone</ion-label>
+                  <ion-input type="text" formControlName="phoneNumber"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Endereço</ion-label>
+                  <ion-input type="text" formControlName="address"></ion-input>
+                </ion-item>
+              </ion-list>
+            </form>
+          </ion-card-content>
+        </ion-card>
+        <p>
+          <ion-button color="primary" shape="round" fill="outline" expand="full" size="large" [disabled]="form.invalid"
+            (click)="addContact()" *ngIf="mode == 'create'">
+            Adicionar</ion-button>
 
-<ion-content>
-
+          <ion-button color="secondary" shape="round" fill="outline" expand="full" size="large"
+            [disabled]="form.invalid" (click)="updateContact()" *ngIf="mode == 'update'">
+            Alterar</ion-button>
+        </p>
+        <br>
+        <ion-button routerLink="/home" color="tertiary" shape="round" fill="clear" expand="full" size="small">Voltar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

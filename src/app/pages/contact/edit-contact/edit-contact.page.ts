@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Contact } from 'src/app/models/contact.model';
+import { ContactService } from 'src/app/services/contact.service';
+import { Result } from 'src/app/models/result.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ContactUtil } from 'src/app/utils/contact.util';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-contact',
@@ -6,10 +13,54 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-contact.page.scss'],
 })
 export class EditContactPage implements OnInit {
+  public form: FormGroup;
+  public contact: Contact = new Contact();
+  public mode: string = 'create';
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private service: ContactService, private fb: FormBuilder, private router: ActivatedRoute, private navCtrl: NavController) {
+    this.form = this.fb.group({
+      name: [this.contact.name, Validators.minLength(6)],
+      id: [this.contact.id],
+      email: [this.contact.email, Validators.minLength(6)],
+      phoneNumber: [this.contact.phoneNumber, Validators.minLength(6)],
+      address: [this.contact.address, Validators.minLength(6)],
+      image: ['https://picsum.photos/300/'],
+      governmentId: [this.contact.governmentId, Validators.minLength(6)]
+    });
   }
 
+  ngOnInit() {
+    let id = this.router.snapshot.paramMap.get('contact');
+    if (id) {
+      const selectedContact = ContactUtil.get();
+      if (selectedContact && selectedContact.id == id) {
+        this.contact = selectedContact;
+        this.mode = 'update';
+      }
+    }
+  }
+
+  addContact() {
+    this.form.disable();
+    this.service.addContact(this.form.value).subscribe((res: Result) => {
+      if (res.success)
+        console.log(res.message);
+      this.navCtrl.navigateBack('/home');
+    }, (err) => {
+      console.log("Erro ao Cadastrar");
+      this.form.enable();
+    });
+  }
+
+  updateContact() {
+    this.form.disable();
+    this.service.updateContact(this.form.value).subscribe((res: Result) => {
+      if (res.success)
+        console.log(res.message);
+      this.navCtrl.navigateBack('/home');
+    }, (err) => {
+      console.log("Erro ao Alterar");
+      this.form.enable();
+    });
+  }
 }

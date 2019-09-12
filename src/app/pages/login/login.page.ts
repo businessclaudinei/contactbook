@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavController, ToastController, LoadingController } from '@ionic/angular';
 import { UserUtil } from 'src/app/utils/user.util';
+import { User } from 'src/app/models/user.model';
+import { Result } from 'src/app/models/result.model';
 
 @Component({
   selector: 'app-login',
@@ -37,8 +39,8 @@ export class LoginPage implements OnInit {
     loading.present();
 
     this.service.auth(this.form.value).subscribe(
-      (res: any) => {
-        this.showSuccess(res);
+      (res: Result) => {
+        this.showSuccess(res.data);
         loading.dismiss();
       },
       (err: any) => {
@@ -58,7 +60,7 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 
-  async showSuccess(user: any) {
+  async showSuccess(user: User) {
     UserUtil.set(user);
     this.navCtrl.navigateRoot('/');
   }
