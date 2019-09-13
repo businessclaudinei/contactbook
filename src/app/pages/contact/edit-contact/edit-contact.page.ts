@@ -54,7 +54,6 @@ export class EditContactPage implements OnInit {
     loading.present();
 
     this.service.addContact(this.form.value).subscribe((res: Result) => {
-      console.log(res.message);
       loading.dismiss();
       MessageUtil.showSuccess(res.message, this.alertCtrl, () => {
         if (res.success)
