@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from 'src/app/services/contact.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, NavController } from '@ionic/angular';
 import { Result } from 'src/app/models/result.model';
+import { Contact } from 'src/app/models/contact.model';
+import { ContactUtil } from 'src/app/utils/contact.util';
 
 @Component({
   selector: 'app-contact-list',
@@ -10,12 +12,22 @@ import { Result } from 'src/app/models/result.model';
 })
 export class ContactListPage implements OnInit {
   public contacts: any[];
-  constructor(private service: ContactService, private toastCtrl: ToastController) { }
+  constructor(private service: ContactService, private toastCtrl: ToastController, private navCtrl: NavController) { }
 
   ngOnInit() {
     this.service.getContacts().subscribe((res: Result) => {
       this.contacts = res.data;
     });
+  }
+
+  editContact(contact: Contact) {
+    ContactUtil.set(contact);
+    this.navCtrl.navigateForward('/editor');
+  }
+
+  addContact() {
+    ContactUtil.clear();
+    this.navCtrl.navigateForward('/editor');
   }
 
   async showMessage(message: string) {

@@ -18,6 +18,11 @@ export class EditContactPage implements OnInit {
   public mode: string = 'create';
 
   constructor(private service: ContactService, private fb: FormBuilder, private router: ActivatedRoute, private navCtrl: NavController) {
+    const selectedContact = ContactUtil.get();
+    if (selectedContact) {
+      this.contact = selectedContact;
+      this.mode = 'update';
+    }
     this.form = this.fb.group({
       name: [this.contact.name, Validators.minLength(6)],
       id: [this.contact.id],
@@ -30,22 +35,15 @@ export class EditContactPage implements OnInit {
   }
 
   ngOnInit() {
-    let id = this.router.snapshot.paramMap.get('contact');
-    if (id) {
-      const selectedContact = ContactUtil.get();
-      if (selectedContact && selectedContact.id == id) {
-        this.contact = selectedContact;
-        this.mode = 'update';
-      }
-    }
+
   }
 
   addContact() {
     this.form.disable();
     this.service.addContact(this.form.value).subscribe((res: Result) => {
+      console.log(res.message);
       if (res.success)
-        console.log(res.message);
-      this.navCtrl.navigateBack('/home');
+        this.navCtrl.navigateBack('/home');
     }, (err) => {
       console.log("Erro ao Cadastrar");
       this.form.enable();
@@ -55,9 +53,9 @@ export class EditContactPage implements OnInit {
   updateContact() {
     this.form.disable();
     this.service.updateContact(this.form.value).subscribe((res: Result) => {
+      console.log(res.message);
       if (res.success)
-        console.log(res.message);
-      this.navCtrl.navigateBack('/home');
+        this.navCtrl.navigateBack('/home');
     }, (err) => {
       console.log("Erro ao Alterar");
       this.form.enable();

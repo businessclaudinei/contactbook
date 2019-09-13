@@ -6,7 +6,7 @@ export class ContactUtil {
         if (!contact) return null;
         return JSON.parse(contact);
     }
-    static set(contact: Contact): any {
+    static set(contact: Contact) {
         localStorage.setItem('contactbook.selectedContact', JSON.stringify(contact));
     }
     static clear() {

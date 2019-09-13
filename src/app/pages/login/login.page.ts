@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController) {
     this.form = this.fb.group({
-      username: ['', Validators.minLength(6)],
+      email: ['', Validators.minLength(6)],
       password: ['', Validators.minLength(6)]
     });
   }

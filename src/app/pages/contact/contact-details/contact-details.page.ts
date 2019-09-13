@@ -16,9 +16,9 @@ export class ContactDetailsPage implements OnInit {
   constructor(private service: ContactService, private router: ActivatedRoute) { }
 
   ngOnInit() {
-    let id = this.router.snapshot.paramMap.get('contact');
-    if (id) {
-      this.service.getContact(id).subscribe((res: Result) => {
+    let email = this.router.snapshot.paramMap.get('contact');
+    if (email) {
+      this.service.getContact(email).subscribe((res: Result) => {
         this.contact = res.data;
       }, (err) => { });
     }
