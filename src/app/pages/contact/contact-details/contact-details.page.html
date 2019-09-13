@@ -1,16 +1,7 @@
 <ion-content *ngIf="contact" class="ion-padding">
   <h2>
-    {{contact.title}} <br>
-    <small>{{contact.brand}}</small>
+    {{contact.name}} <br>
+    <small>{{contact.email}}</small>
   </h2>
-  <h1>{{contact.price|currency:'BRL'}}</h1>
-  <ion-grid>
-    <ion-row>
-      <ion-col sizeMd="3" sizeXs="12" *ngFor="let i of contact.images">
-        <ion-card>
-          <img src="{{i}}" alt="{{contact.title}}">
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <h1>{{contact.phoneNumber}}</h1>
 </ion-content>
