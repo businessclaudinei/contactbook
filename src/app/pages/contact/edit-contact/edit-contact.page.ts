@@ -1,3 +1,4 @@
+import { CustomValidator } from './../../../validators/custom.validator';
 import { MessageUtil } from './../../../utils/message.util';
 import { Component, OnInit } from '@angular/core';
 import { Contact } from 'src/app/models/contact.model';
@@ -35,11 +36,11 @@ export class EditContactPage implements OnInit {
     this.form = this.fb.group({
       name: [this.contact.name, Validators.minLength(6)],
       id: [this.contact.id],
-      email: [this.contact.email, Validators.minLength(6)],
-      phoneNumber: [this.contact.phoneNumber, Validators.minLength(6)],
+      email: [this.contact.email, Validators.compose([CustomValidator.isEmail, Validators.required])],
+      phoneNumber: [this.contact.phoneNumber, Validators.minLength(11)],
       address: [this.contact.address, Validators.minLength(6)],
       image: ['https://picsum.photos/300/'],
-      governmentId: [this.contact.governmentId, Validators.minLength(6)]
+      governmentId: [this.contact.governmentId, CustomValidator.isCpf]
     });
   }
 
