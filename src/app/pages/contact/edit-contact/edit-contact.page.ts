@@ -34,11 +34,11 @@ export class EditContactPage implements OnInit {
 
     this.form = this.fb.group({
       name: [this.contact.name, Validators.minLength(6)],
-      // id: [this.contact.id],
+      id: [this.contact.id],
       email: [this.contact.email, Validators.compose([CustomValidator.isEmail, Validators.required])],
       phoneNumber: [this.contact.phoneNumber, Validators.minLength(11)],
       address: [this.contact.address, Validators.minLength(6)],
-      // image: ['https://picsum.photos/300/'],
+      image: ['https://picsum.photos/300/'],
       governmentId: [this.contact.governmentId, CustomValidator.isCpf]
     });
   }
