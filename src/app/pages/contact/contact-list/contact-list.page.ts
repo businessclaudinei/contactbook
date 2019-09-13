@@ -26,6 +26,7 @@ export class ContactListPage implements OnInit {
       message: "Carregando contatos..."
     });
     loading.present();
+
     this.service.getContacts().subscribe((res: Result) => {
       this.contacts = res.data;
       loading.dismiss();
@@ -48,5 +49,9 @@ export class ContactListPage implements OnInit {
       showCloseButton: true
     });
     toast.present();
+  }
+
+  ngOnChanges() {
+    this.loadContacts();
   }
 }

@@ -20,9 +20,10 @@ export class ContactCardComponent implements OnInit {
     this.navCtrl.navigateForward('/editor');
   }
 
-  async presentModal() {
+  async presentModal(contact: Contact) {
     const modal = await this.modalController.create({
-      component: ContactDetailsPage
+      component: ContactDetailsPage,
+      componentProps: { 'contact': contact }
     });
     return await modal.present();
   }
