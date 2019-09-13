@@ -14,6 +14,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { AuthGuard } from './guards/auth.guard';
+import { PhoneNumberPipe } from './pipes/phoneNumber.pipe';
 
 @NgModule({
   declarations: [AppComponent, MasterPage, UserCardComponent],

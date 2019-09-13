@@ -12,10 +12,6 @@ const routes: Routes = [
     component: MasterPage,
     canActivate: [AuthGuard],
     children: [
-      // {
-      //   path: 'home',
-      //   loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
-      // },
       {
         path: 'home',
         loadChildren: () => import('./pages/contact/contact-list/contact-list.module').then(m => m.ContactListPageModule)
@@ -29,10 +25,12 @@ const routes: Routes = [
         loadChildren: () => import('./pages/contact/edit-contact/edit-contact.module').then(m => m.EditContactPageModule)
       }
     ]
+  },
+  {
+    path: 'reset',
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then(m => m.ResetPasswordPageModule)
   }
 ];
-
-//{ path: 'edit-contact', loadChildren: () => import('./pages/contact/edit-contact/edit-contact.module').then(m => m.HomePageModule) },
 
 
 @NgModule({

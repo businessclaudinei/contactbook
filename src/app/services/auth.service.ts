@@ -16,4 +16,8 @@ export class AuthService {
   createUser(data: any) {
     return this.http.post(`${environment.apiUrl}/account`, data);
   }
+
+  resetPassword(data: any) {
+    return this.http.put(`${environment.apiUrl}/account`, data);
+  }
 }

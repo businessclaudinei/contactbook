@@ -1,9 +1,22 @@
-<ion-item>
-  <br>
-  <ion-avatar slot="start">
-    <img src="{{contact.image}}" alt="{{contact.name}}">
-  </ion-avatar>
-  <ion-label>{{contact.name}}
-    <small>{{contact.email}}</small>
-  </ion-label>
-</ion-item>
+ <ion-avatar class="avatar">
+   <img src="{{contact.image}}" alt="{{contact.name}}">
+ </ion-avatar>
+ <ion-card>
+   <ion-card-header>
+     <ion-label center> {{contact.name}}</ion-label>
+   </ion-card-header>
+   <ion-card-content>
+     <ion-card-title>
+       {{contact.phoneNumber|phone:'BR'}}
+     </ion-card-title>
+     <ion-button (click)="editContact(contact)" expand="full">
+       <ion-icon name="edit" slot="start"></ion-icon>
+       <ion-label>Alterar Contato</ion-label>
+     </ion-button>
+   </ion-card-content>
+   <ion-item routerLink="/contact/{{contact.id}}" detail>
+     <ion-icon name="more" slot="start"></ion-icon>
+     <ion-label>Detalhes</ion-label>
+   </ion-item>
+
+ </ion-card>
