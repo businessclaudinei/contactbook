@@ -1,3 +1,4 @@
+import { ContactCardComponent } from './../../../components/contact-card/contact-card.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,6 +22,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ContactListPage]
+  declarations: [ContactListPage, ContactCardComponent]
 })
-export class ContactListPageModule {}
+export class ContactListPageModule { }

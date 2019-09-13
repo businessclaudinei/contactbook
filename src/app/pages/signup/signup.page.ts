@@ -1,3 +1,4 @@
+import { MessageUtil } from './../../utils/message.util';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NavController, AlertController, ToastController, LoadingController } from '@ionic/angular';
@@ -31,43 +32,22 @@ export class SignupPage implements OnInit {
 
   async submit() {
     const loading = await this.loadingController.create({
-      message: "Criando..."
+      message: "Criando usuario..."
     });
     loading.present();
 
     this.service.createUser(this.form.value)
       .subscribe((res: Result) => {
         loading.dismiss();
-        this.showSuccess(res.message);
+        MessageUtil.showSuccess(res.message, this.alertCtrl, () => {
+          if (res.success)
+            this.navCtrl.navigateRoot('/login');
+        });
       }, (err: any) => {
-        this.showError('Falha ao cadastrar');
         loading.dismiss();
+        MessageUtil.showError('Falha ao cadastrar', this.toastCtrl);
       }, () => {
       });
 
-  }
-
-  async showError(message: string) {
-    const toast = await this.toastCtrl.create({
-      message: message,
-      duration: 3000,
-      showCloseButton: true,
-      closeButtonText: 'Fechar'
-    });
-
-    toast.present();
-  }
-
-  async showSuccess(message: string) {
-    const alert = await this.alertCtrl.create({
-      message: message,
-      buttons: [{
-        text: 'Continuar',
-        handler: () => {
-          this.navCtrl.navigateRoot('/login');
-        }
-      }]
-    });
-    alert.present();
   }
 }

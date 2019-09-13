@@ -1,7 +1,8 @@
+import { MessageUtil } from './../../utils/message.util';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { NavController, ToastController, LoadingController } from '@ionic/angular';
+import { NavController, ToastController, LoadingController, AlertController } from '@ionic/angular';
 import { UserUtil } from 'src/app/utils/user.util';
 import { User } from 'src/app/models/user.model';
 import { Result } from 'src/app/models/result.model';
@@ -18,6 +19,7 @@ export class LoginPage implements OnInit {
     private service: AuthService,
     private navCtrl: NavController,
     private toastCtrl: ToastController,
+    private alertCtrl: AlertController,
     private loadingCtrl: LoadingController) {
     this.form = this.fb.group({
       email: ['', Validators.minLength(6)],
@@ -40,29 +42,19 @@ export class LoginPage implements OnInit {
 
     this.service.auth(this.form.value).subscribe(
       (res: Result) => {
-        this.showSuccess(res.data);
         loading.dismiss();
+        if (res.success) {
+          UserUtil.set(res.data);
+          this.navCtrl.navigateRoot('/');
+        } else {
+          MessageUtil.showError(res.message, this.toastCtrl);
+        }
       },
       (err: any) => {
-        this.showError('Usuario com senha inválida!');
+        console.log(err);
         loading.dismiss();
+        MessageUtil.showError('Falha ao realizar o login!', this.toastCtrl);
       });
-  }
-
-  async showError(message: string) {
-    const toast = await this.toastCtrl.create({
-      message: message,
-      duration: 3000,
-      showCloseButton: true,
-      closeButtonText: 'Fechar'
-    });
-
-    toast.present();
-  }
-
-  async showSuccess(user: User) {
-    UserUtil.set(user);
-    this.navCtrl.navigateRoot('/');
   }
 
 }

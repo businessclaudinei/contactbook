@@ -1,3 +1,4 @@
+import { MessageUtil } from './../../../utils/message.util';
 import { Component, OnInit } from '@angular/core';
 import { Contact } from 'src/app/models/contact.model';
 import { ContactService } from 'src/app/services/contact.service';
@@ -5,7 +6,7 @@ import { Result } from 'src/app/models/result.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ContactUtil } from 'src/app/utils/contact.util';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController, ToastController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-contact',
@@ -17,12 +18,20 @@ export class EditContactPage implements OnInit {
   public contact: Contact = new Contact();
   public mode: string = 'create';
 
-  constructor(private service: ContactService, private fb: FormBuilder, private router: ActivatedRoute, private navCtrl: NavController) {
+  constructor(private service: ContactService,
+    private fb: FormBuilder,
+    private router: ActivatedRoute,
+    private navCtrl: NavController,
+    private toastCtrl: ToastController,
+    private loadingController: LoadingController,
+    private alertCtrl: AlertController) {
+
     const selectedContact = ContactUtil.get();
     if (selectedContact) {
       this.contact = selectedContact;
       this.mode = 'update';
     }
+
     this.form = this.fb.group({
       name: [this.contact.name, Validators.minLength(6)],
       id: [this.contact.id],
@@ -35,29 +44,47 @@ export class EditContactPage implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
-  addContact() {
+  async addContact() {
     this.form.disable();
+    const loading = await this.loadingController.create({
+      message: "Adicionando contato..."
+    });
+    loading.present();
+
     this.service.addContact(this.form.value).subscribe((res: Result) => {
       console.log(res.message);
-      if (res.success)
-        this.navCtrl.navigateBack('/home');
+      loading.dismiss();
+      MessageUtil.showSuccess(res.message, this.alertCtrl, () => {
+        if (res.success)
+          this.navCtrl.navigateRoot('/home');
+      });
     }, (err) => {
-      console.log("Erro ao Cadastrar");
+      console.log(err);
+      loading.dismiss();
+      MessageUtil.showError("Erro ao Cadastrar", this.toastCtrl)
       this.form.enable();
     });
   }
 
-  updateContact() {
+  async updateContact() {
     this.form.disable();
+    const loading = await this.loadingController.create({
+      message: "Alterando contato..."
+    });
+    loading.present();
     this.service.updateContact(this.form.value).subscribe((res: Result) => {
       console.log(res.message);
-      if (res.success)
-        this.navCtrl.navigateBack('/home');
+      loading.dismiss();
+      MessageUtil.showSuccess(res.message, this.alertCtrl, () => {
+        if (res.success)
+          this.navCtrl.navigateRoot('/home');
+      });
     }, (err) => {
-      console.log("Erro ao Alterar");
+      console.log(err);
+      loading.dismiss();
+      MessageUtil.showError("Erro ao Alterar", this.toastCtrl)
       this.form.enable();
     });
   }

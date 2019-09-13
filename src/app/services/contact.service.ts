@@ -24,10 +24,10 @@ export class ContactService {
   }
 
   removeContact(contact: Contact) {
-    return this.http.delete(`${environment.apiUrl}${contact.email}?token=${UserUtil.get().token}`);
+    return this.http.delete(`${environment.apiUrl}/${contact.email}?token=${UserUtil.get().token}`);
   }
 
   updateContact(contact: Contact) {
-    return this.http.put(`${environment.apiUrl}${contact.email}?token=${UserUtil.get().token}`, contact);
+    return this.http.put(`${environment.apiUrl}/${contact.email}?token=${UserUtil.get().token}`, contact);
   }
 }

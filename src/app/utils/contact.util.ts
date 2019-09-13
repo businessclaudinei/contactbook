@@ -1,3 +1,4 @@
+import { LoadingController } from '@ionic/angular';
 import { Contact } from '../models/contact.model';
 
 export class ContactUtil {
@@ -12,4 +13,6 @@ export class ContactUtil {
     static clear() {
         localStorage.removeItem('contactbook.selectedContact');
     }
+
+
 }
