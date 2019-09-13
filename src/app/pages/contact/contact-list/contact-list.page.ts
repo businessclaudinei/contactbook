@@ -35,11 +35,6 @@ export class ContactListPage implements OnInit {
     });
   }
 
-  editContact(contact: Contact) {
-    ContactUtil.set(contact);
-    this.navCtrl.navigateForward('/editor');
-  }
-
   addContact() {
     ContactUtil.clear();
     this.navCtrl.navigateForward('/editor');
