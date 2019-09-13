@@ -1,7 +1,7 @@
 {
   "name": "contactbook",
   "version": "0.0.1",
-  "author": "Ionic Framework",
+  "author": "Claudinei Silva Santos",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -61,5 +61,5 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0"
   },
-  "description": "An Ionic project"
+  "description": "Projeto final da aula do Baltieri Balta.io"
 }

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://apicontactbook.herokuapp.com/api/contact"
+  apiUrl: "http://localhost:3000/contact"
 };
 
 /*
