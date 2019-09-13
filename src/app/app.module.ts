@@ -17,9 +17,10 @@ import { AuthGuard } from './guards/auth.guard';
 import { PhoneNumberPipe } from './pipes/phoneNumber.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ContactDetailsPage } from './pages/contact/contact-details/contact-details.page';
 
 @NgModule({
-  declarations: [AppComponent, MasterPage, UserCardComponent],
+  declarations: [AppComponent, MasterPage, UserCardComponent, ContactDetailsPage],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule, FormsModule, HttpClientModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
