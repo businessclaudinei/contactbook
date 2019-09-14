@@ -1,3 +1,4 @@
+import { UserUtil } from 'src/app/utils/user.util';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -18,6 +19,6 @@ export class AuthService {
   }
 
   resetPassword(data: any) {
-    return this.http.put(`${environment.apiUrl}/account`, data);
+    return this.http.put(`${environment.apiUrl}/account?token=${UserUtil.get().token}`, data);
   }
 }
