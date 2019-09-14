@@ -37,7 +37,7 @@ export class ContactListPage implements OnInit {
 
   addContact() {
     ContactUtil.clear();
-    this.navCtrl.navigateForward('/editor');
+    this.navCtrl.navigateRoot('/editor');
   }
 
   ngOnChanges() {
