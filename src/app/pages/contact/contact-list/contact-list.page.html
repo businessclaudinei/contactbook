@@ -2,7 +2,7 @@
   <ion-grid>
     <ion-row center>
       <ion-col sizeMd="3" sizeSm="6" sizeXs="12" *ngFor="let contact of contacts">
-        <app-contact-card [contact]="contact"></app-contact-card>
+        <app-contact-card [contact]="contact" [contacts]="contacts"></app-contact-card>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -13,7 +13,6 @@ import { ContactUtil } from 'src/app/utils/contact.util';
 export class ContactListPage implements OnInit {
   public contacts: any[];
   constructor(private service: ContactService,
-    private toastCtrl: ToastController,
     private navCtrl: NavController,
     private loadingController: LoadingController) { }
 
@@ -39,16 +38,6 @@ export class ContactListPage implements OnInit {
   addContact() {
     ContactUtil.clear();
     this.navCtrl.navigateForward('/editor');
-  }
-
-  async showMessage(message: string) {
-    const toast = await this.toastCtrl.create({
-      message: message,
-      closeButtonText: 'Fechar',
-      duration: 3000,
-      showCloseButton: true
-    });
-    toast.present();
   }
 
   ngOnChanges() {
