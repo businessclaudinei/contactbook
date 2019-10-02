@@ -1,10 +1,8 @@
-[
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "xyz.appmaker.kszuab",
-      "sha256_cert_fingerprints": ["62:D5:77:4F:9A:EE:65:E1:4E:39:DF:97:8B:C7:1E:D5:E6:F3:E0:C8:F8:A5:6D:6B:4A:F9:3A:90:A3:9D:10:7F"]
-    }
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "xyz.appmaker.kszuab",
+    "sha256_cert_fingerprints": ["62:D5:77:4F:9A:EE:65:E1:4E:39:DF:97:8B:C7:1E:D5:E6:F3:E0:C8:F8:A5:6D:6B:4A:F9:3A:90:A3:9D:10:7F", "SHA256: 5C:CD:84:5B:7B:17:FF:9B:88:14:47:97:C1:6D:F4:C0:59:9F:2F:88:9A:CB:E1:6D:51:F5:3A:CB:B9:66:B3:67"]
   }
-]
+}]
